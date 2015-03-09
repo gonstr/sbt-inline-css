@@ -34,15 +34,15 @@ object SbtJuice extends AutoPlugin {
     includeFilter := GlobFilter("*.html"),
 
     jsOptions := JsObject(
-      "preserveMediaQueries" -> JsBoolean(preserveMediaQueries.value),
-      "preserveImportant" -> JsBoolean(preserveImportant.value)
+/*      "preserveMediaQueries" -> JsBoolean(preserveMediaQueries.value),
+      "preserveImportant" -> JsBoolean(preserveImportant.value)*/
+      "url" -> JsString("filePath")
     ).toString()
   )
 
   override def projectSettings = Seq(
     preserveMediaQueries := false,
-    preserveImportant := false,
-    JsEngineKeys.engineType in juice := JsEngineKeys.EngineType.Node
+    preserveImportant := false
 
   ) ++ inTask(juice)(
     SbtJsTask.jsTaskSpecificUnscopedSettings ++
@@ -50,7 +50,7 @@ object SbtJuice extends AutoPlugin {
       inConfig(TestAssets)(juiceUnscopedSettings) ++
       Seq(
         moduleName := "juice",
-        shellFile := getClass.getClassLoader.getResource("juice-shell.js"),
+        shellFile := getClass.getClassLoader.getResource("inline-css-shell-simple.js"),
 
         taskMessage in Assets := "Juice inlining css",
         taskMessage in TestAssets := "Juice test inlining css"
