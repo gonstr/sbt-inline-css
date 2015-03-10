@@ -24,10 +24,4 @@ includeFilter in (Assets, InlineCssKeys.inlineCss) := "test.html"
 ```
 
 This will generate files where 'inline.' is added to the file extension; e.g. test.inline.html will be generated
-for a file named test.html
-
-Add `inlineCss` to your assets pipeline:
-
-```scala
-pipelineStages := Seq(inlineCss)
-```
+for a file named test.html.
