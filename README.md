@@ -20,13 +20,13 @@ npm install juice
 In your build file add an include filter for the files you want to inline:
 
 ```scala
-includeFilter in (Assets, InlineCssKeys.inlineCss) := "fileToInline.tl" | "*.html"
+includeFilter in (Assets, InlineCssKeys.inlineCss) := "test.html"
 ```
 
-This will generate files with where 'inline.' is added to the file extension; e.g. test.inline.html will be generated
+This will generate files where 'inline.' is added to the file extension; e.g. test.inline.html will be generated
 for a file named test.html
 
-Add `ilineCss` to your assets pipeline:
+Add `inlineCss` to your assets pipeline:
 
 ```scala
 pipelineStages := Seq(inlineCss)
