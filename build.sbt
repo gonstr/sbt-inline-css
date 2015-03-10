@@ -2,16 +2,14 @@ sbtPlugin := true
 
 organization := "se.gonstr"
 
-name := "sbt-juice"
+name := "sbt-inline-css"
 
 version := "0.1.0-SNAPSHOT"
 
 scalaVersion := "2.10.5"
 
 libraryDependencies ++= Seq(
-  "com.typesafe" % "jstranspiler" % "1.0.0-SNAPSHOT",
   "org.webjars" % "mkdirp" % "0.3.5",
-//  "org.webjars" % "stylus" % "0.45.1",
   "org.webjars" % "when-node" % "3.2.2"
 )
 
