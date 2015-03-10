@@ -5,7 +5,7 @@
 
     var args = process.argv,
         fs = require("fs"),
-        inlineCss = require("inline-css"),
+        juice = require("juice"),
         mkdirp = require("mkdirp"),
         path = require("path");
 
@@ -33,19 +33,20 @@
 
     sourceFileMappings.forEach(function (sourceFileMapping) {
         var input = sourceFileMapping[0];
-        var outputFile = sourceFileMapping[1].replace(".html", "inline.html");
+        var outputFile = sourceFileMapping[1].replace(/^(.*)\.(.*)$/, "$1.inline.$2"); // replaces file ext with .inline.ext
         var output = path.join(target, outputFile);
 
-        fs.readFile(input, "utf8", function (e, contents) {
-            throwIfErr(e);
+        fs.readFile(input, "utf8", function (err, contents) {
+            throwIfErr(err);
 
-            inlineCss(contents, options, function (err, html) {
+            juice.juiceResources(contents, options, function (err, inlined) {
+                throwIfErr(err);
 
-                mkdirp(path.dirname(output), function (e) {
-                    throwIfErr(e);
+                mkdirp(path.dirname(output), function (err) {
+                    throwIfErr(err);
 
-                    fs.writeFile(output, html, "utf8", function (e) {
-                        throwIfErr(e);
+                    fs.writeFile(output, inlined, "utf8", function (err) {
+                        throwIfErr(err);
 
                         results.push({
                             source: input,
