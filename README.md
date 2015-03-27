@@ -4,7 +4,7 @@
 # sbt-inline-css
 sbt-web plugin for inlining css in html files.
 
-Uses the [juice][1] node plugin https://github.com/Automattic/juice
+Uses the [juice][1] node plugin
 
 [1]: https://github.com/Automattic/juice
 
