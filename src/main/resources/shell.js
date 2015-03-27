@@ -39,25 +39,23 @@
         fs.readFile(input, "utf8", function (err, contents) {
             throwIfErr(err);
 
-            juice.juiceResources(contents, options, function (err, inlined) {
+            var inlined = juice(contents, options);
+
+            mkdirp(path.dirname(output), function (err) {
                 throwIfErr(err);
 
-                mkdirp(path.dirname(output), function (err) {
+                fs.writeFile(output, inlined, "utf8", function (err) {
                     throwIfErr(err);
 
-                    fs.writeFile(output, inlined, "utf8", function (err) {
-                        throwIfErr(err);
-
-                        results.push({
-                            source: input,
-                            result: {
-                                filesRead: [input],
-                                filesWritten: [output]
-                            }
-                        });
-
-                        parseDone();
+                    results.push({
+                        source: input,
+                        result: {
+                            filesRead: [input],
+                            filesWritten: [output]
+                        }
                     });
+
+                    parseDone();
                 });
             });
         });
